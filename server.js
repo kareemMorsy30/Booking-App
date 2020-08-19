@@ -7,15 +7,37 @@ const app = express();
 
 let schema = buildSchema(`
     type Query {
-        events: [String]
+        events: [Event!]!
     }
     type Mutation {
-        createEvent(name: String):String 
+        createEvent(eventInput: EventInput!):Event! 
+    }
+    input EventInput {
+        title: String!,
+        description: String!,
+        price: Float!
+    }
+    type Event {
+        _id: ID,
+        title: String,
+        description: String,
+        price: Float,
+        date: String
     }
 `);
 
-let events = () => ['Romantic', 'Sports', 'Electronics'];
-let createEvent = args => args.name;
+const Events = [];
+
+let events = () => Events;
+let createEvent = args => {
+    let Event = {
+        ...args.eventInput,
+        _id: Math.floor((Math.random() * 1000000) + 1),
+        date: new Date().toISOString()
+    }
+    Events.push(Event);
+    return Event;
+};
 
 let rootValue = {
     events,
