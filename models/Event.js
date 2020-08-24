@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoose_autopopulate = require('mongoose-autopopulate');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
@@ -20,8 +21,11 @@ const eventSchema = new Schema({
     },
     creator: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        autopopulate: true
     }
 });
+
+eventSchema.plugin(mongoose_autopopulate);
 
 module.exports = mongoose.model('Event', eventSchema);
