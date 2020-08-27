@@ -3,11 +3,14 @@ const { buildSchema } = require('graphql');
 let schema = buildSchema(`
     type Query {
         events: [Event!]!,
-        users: [User!]!
+        users: [User!]!,
+        bookings: [Booking!]!
     }
     type Mutation {
         createEvent(eventInput: EventInput!):Event!,
-        createUser(userInput: UserInput!):User!
+        createUser(userInput: UserInput!):User!,
+        addBooking(eventId: ID!):Booking!,
+        cancelBooking(bookingId: ID!):Event
     }
     input EventInput {
         title: String!,
@@ -32,6 +35,13 @@ let schema = buildSchema(`
         email: String!,
         password: String,
         createdEvents: [Event!]!
+    }
+    type Booking {
+        _id: ID,
+        user: User!,
+        event: Event!,
+        createdAt: String!,
+        updatedAt: String!
     }
 `);
 
