@@ -5,19 +5,9 @@ const { graphqlHTTP } = require('express-graphql');
 
 // Custom modules
 const schema = require('./controllers/graphql/schema');
-const {
-    userController,
-    eventController
-} = require('./controllers/allControllers');
+const rootValue = require('./controllers/graphql/resolvers');
 
 const app = express();
-
-let rootValue = {
-    events: eventController.events,
-    createEvent: eventController.createEvent,
-    users: userController.users,
-    createUser: userController.createUser
-}
 
 app.use(bodyParser.json());
 
