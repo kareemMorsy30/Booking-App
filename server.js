@@ -6,10 +6,14 @@ const { graphqlHTTP } = require('express-graphql');
 // Custom modules
 const schema = require('./controllers/graphql/schema');
 const rootValue = require('./controllers/graphql/resolvers');
+const auth = require('./middlewares/auth');
 
 const app = express();
 
 app.use(bodyParser.json());
+
+// Middlewares
+app.use(auth);
 
 app.use('/graphql', graphqlHTTP({
     schema,
