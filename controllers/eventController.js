@@ -14,8 +14,9 @@ let events = () => {
     });
 };
 
-let createEvent = args => {
-    return User.findById('5f41949ec52cdd3a1b5c801b')
+let createEvent = (args, req) => {
+    if(!req.isAuth) throw new Error('User is not authenticated!');
+    return User.findById(req.user._id)
     .then(user => {
         let event = new Event({
             ...args.eventInput,

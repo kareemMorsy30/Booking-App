@@ -5,6 +5,7 @@ let schema = buildSchema(`
         events: [Event!]!,
         users: [User!]!,
         bookings: [Booking!]!
+        login(email: String!, password: String!):Auth
     }
     type Mutation {
         createEvent(eventInput: EventInput!):Event!,
@@ -42,6 +43,11 @@ let schema = buildSchema(`
         event: Event!,
         createdAt: String!,
         updatedAt: String!
+    }
+    type Auth {
+        userId: ID,
+        token: String!,
+        expiresIn: Int
     }
 `);
 

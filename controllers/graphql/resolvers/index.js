@@ -1,7 +1,8 @@
 const {
     userController,
     eventController,
-    bookingController
+    bookingController,
+    authController
 } = require('../../allControllers');
 
 let rootValue = {
@@ -11,7 +12,8 @@ let rootValue = {
     createUser: userController.createUser,
     bookings: bookingController.bookings,
     addBooking: bookingController.addBooking,
-    cancelBooking: bookingController.cancelBooking
+    cancelBooking: bookingController.cancelBooking,
+    login: authController.login
 }
 
 module.exports = rootValue;
